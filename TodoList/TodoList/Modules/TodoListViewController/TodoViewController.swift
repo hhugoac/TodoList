@@ -32,22 +32,7 @@ class TodoViewController: UIViewController {
     }
 
     @objc private func addItemAlert() {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Enter a new task", message: "New item ", preferredStyle: .alert)
-            alert.addTextField(configurationHandler: nil)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            alert.addAction(UIAlertAction(title: "Submit", style: .default) {
-                [weak self] _ in
-                guard let field = alert.textFields?.first, let text = field.text, !text.isEmpty else {
-                    
-                    return
-                }
-                self?.createItem(text)
-            })
-            
-            self.present(alert, animated: true)
-            
-        }
+        createOrUpdateItem(.create, nil)
     }
     
     // MARK: - CRUD methods for the database
